@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Rift Shuttler</string>
+
+    <string name="pace_logo_description">Logo used by Pace University.</string>
+    <string name="email_hint">Pace Email</string>
+    <string name="email_end">\@pace.edu</string>
+    <string name="password_hint">Password</string>
+
+    <string name="login_button_label">Login</string>
+    <string name="login_success">Login successful!</string>
+    <string name="login_label">Already have an account? Login</string>
+    <string name="register_button_label">Register</string>
+    <string name="register_success">Register successful!</string>
+    <string name="register_label">Register Here</string>
+
+    <string name="missing_field_msg">Every field must be filled in…</string>
+    <string name="invalid_email_msg">You must enter a valid Pace email…</string>
+    <string name="short_password_msg">Password must contain a minimum of 8 characters…</string>
+    <string name="failed_auth_msg">Authentication failed. Please try again.</string>
+
+    <string name="log_out_label">Log Out</string>
+</resources>

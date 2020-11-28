@@ -1,0 +1,12 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="RiftShuttler" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/pace_primary</item>
+        <item name="colorPrimaryDark">@color/pace_primary_dark</item>
+        <item name="colorAccent">@color/pace_secondary</item>
+    </style>
+</resources>

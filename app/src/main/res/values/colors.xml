@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pace_primary">#19387B</color>
+    <color name="pace_primary_light">#364A6C</color>
+    <color name="pace_primary_dark">#535B5D</color>
+    <color name="pace_secondary">#FFC400</color>
+    <color name="pace_secondary_light">#E3B310</color>
+    <color name="pace_secondary_dark">#C6A11F</color>
+    <color name="pace_accent_green">#0B7A75</color>
+    <color name="pace_accent_red">#7B2D26</color>
+    <color name="pace_accent_yellow">#8C7E3E</color>
+    <color name="cloud">#F9F9F9</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
