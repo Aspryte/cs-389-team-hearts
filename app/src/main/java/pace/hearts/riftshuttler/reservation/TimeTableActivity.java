@@ -2,7 +2,10 @@ package pace.hearts.riftshuttler.reservation;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +18,12 @@ import pace.hearts.riftshuttler.R;
 import pace.hearts.riftshuttler.reservation.timetable.TimeTable;
 
 public class TimeTableActivity extends AppCompatActivity {
-    private TimeTable timeTable;
     private String date;
 
-    private Runnable tableInitializer;
+    private TimeTable timeTable;
+    private ProgressBar spinner;
+
+    private Runnable tableInitializer, spinnerRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +44,15 @@ public class TimeTableActivity extends AppCompatActivity {
         }
 
         timeTable = findViewById(R.id.timeTable);
+        spinner = findViewById(R.id.timeTableSpinner);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        spinner.setVisibility(View.VISIBLE);
 
-        Handler tableHandler = new Handler();
+        Handler tableHandler = new Handler(Looper.myLooper());
         tableInitializer = () -> {
             if (timeTable.isInitialized()) {
                 timeTable.initTimeTable(date);
@@ -54,6 +61,15 @@ public class TimeTableActivity extends AppCompatActivity {
                 tableHandler.postDelayed(tableInitializer, 500);
         };
         tableHandler.post(tableInitializer);
+
+        spinnerRunnable = () -> {
+            if (!timeTable.isLoading()) {
+                spinner.setVisibility(View.GONE);
+                tableHandler.removeCallbacks(spinnerRunnable);
+            } else
+                tableHandler.postDelayed(spinnerRunnable, 500);
+        };
+        tableHandler.post(spinnerRunnable);
     }
 
     @Override

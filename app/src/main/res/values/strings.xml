@@ -19,4 +19,9 @@
     <string name="failed_auth_msg">Authentication failed. Please try again.</string>
 
     <string name="log_out_label">Log Out</string>
+
+    <string name="time_table_time_header">TIME</string>
+    <string name="time_table_weekday_template">template-weekday</string>
+
+    <string name="GPS_map_description">Map view of Pace University.</string>
 </resources>

@@ -30,8 +30,6 @@ public class TimeSlot extends AppCompatTextView {
     // TODO: connectedTo field
     private int seatsTaken, totalSeats;
 
-    // private DocumentReference routes;
-
     public TimeSlot(@NonNull Context context) {
         this(context, "01-01-1970", "00:00 AM", "-");
     }
@@ -74,24 +72,22 @@ public class TimeSlot extends AppCompatTextView {
                         String email = user != null ? user.getEmail() : "";
                         boolean reserved = reservedBy != null && reservedBy.contains(email);
 
-                        // TODO: clean this up a bit; separate into multiple lines
+                        // TODO: clean this up a bit; separate into multiple lines perhaps
                         new AlertDialog.Builder(getContext()).setTitle(route + ", " + time)
                                 .setNegativeButton("Back", (dialog, id) -> dialog.cancel())
-                                .setNeutralButton("View GPS", (dialog, id) -> {
-                                    // TODO: GPS
+                                .setNeutralButton("View Map", (dialog, id) -> {
+                                    // TODO: GPS Map
                                 })
                                 .setPositiveButton(reserved ? "Cancel" : "Reserve",
                                         (dialog, id) -> {
-                                            if (!isFull()) {
-                                                document.update(route + "." + time + ".reservedBy", !reserved
-                                                        ? FieldValue.arrayUnion(email) : FieldValue.arrayRemove(email))
-                                                        .addOnCompleteListener(task -> {
-                                                            if (task.isSuccessful())
-                                                                Toast.makeText(getContext(), !reserved ?
-                                                                        "Seat reserved!" : "Reservation canceled...", Toast.LENGTH_SHORT).show();
-                                                        });
-                                            } else
-                                                setBackgroundColor(ContextCompat.getColor(getContext(), R.color.pace_accent_red));
+                                            if (!isFull() && !reserved)
+                                                document.update(route + "." + time + ".reservedBy", FieldValue.arrayUnion(email))
+                                                        .addOnSuccessListener(result -> Toast.makeText(getContext(), "Seat reserved!", Toast.LENGTH_SHORT).show());
+                                            else if (reserved)
+                                                document.update(route + "." + time + ".reservedBy", FieldValue.arrayRemove(email))
+                                                        .addOnSuccessListener(result -> Toast.makeText(getContext(), "Reservation cancelled...", Toast.LENGTH_SHORT).show());
+                                            else
+                                                Toast.makeText(getContext(), "No more seats available...", Toast.LENGTH_SHORT).show();
                                         })
                                 .show();
                     });
